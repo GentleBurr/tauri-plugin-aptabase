@@ -3,14 +3,26 @@ use tauri::webview_version;
 #[cfg(target_os = "linux")]
 static ENGINE_NAME: &str = "WebKitGTK";
 
-#[cfg(target_os = "android")]
-static ENGINE_NAME: &str = "Android System WebView";
-
-#[cfg(any(target_os = "macos", target_os = "ios"))]
+#[cfg(target_os = "macos")]
 static ENGINE_NAME: &str = "WebKit";
 
 #[cfg(target_os = "windows")]
 static ENGINE_NAME: &str = "WebView2";
+
+#[cfg(target_os = "android")]
+static ENGINE_NAME: &str = "Android WebView";
+
+#[cfg(target_os = "ios")]
+static ENGINE_NAME: &str = "WKWebView";
+
+#[cfg(not(any(
+    target_os = "linux",
+    target_os = "macos",
+    target_os = "windows",
+    target_os = "android",
+    target_os = "ios"
+)))]
+static ENGINE_NAME: &str = "Unknown";
 
 #[cfg(debug_assertions)]
 static IS_DEBUG: bool = true;
